@@ -15,7 +15,7 @@ function sendMessage() {
     messages.push({"role": "user", "content": userInput});
 
     try {
-        fetch("http://localhost:8002/message", {
+        fetch("/api/message", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
