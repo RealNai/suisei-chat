@@ -21,7 +21,9 @@ export default async function handler(req, res) {
     });
     res.status(200).send({ message: completion.choices[0].message.content });
   } catch (err) {
-    console.error(err);
+    if (err?.status === 429 || err?.code === "insufficient_quota") {
+      return res.status(402).send({ error: "insufficient_quota" });
+    }
     res.status(500).send(`Error processing request: ${request}`);
   }
 }
